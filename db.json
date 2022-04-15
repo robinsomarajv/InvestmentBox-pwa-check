@@ -1,0 +1,183 @@
+{
+  "questions": [
+    {
+      "id": "1",
+      "question": "What are your investment goals?",
+      "options": {
+        "1": "Childs Education",
+        "2": "Childs Wedding",
+        "3": "Buying a house",
+        "4": "New Vehicle",
+        "5": "Rainy day fund",
+        "6": "Business venture"
+      },
+      "selectedOption": [],
+      "showOnLoad": true,
+      "type": "stack"
+    },
+    {
+      "id": "2",
+      "question": "Which of the following sentences make the most sense to you?",
+      "options": {
+        "1": "I am willing to withstand a potential loss in the short term to maximize my returns in the long term",
+        "2": "I am concern about losses, but expect healthy returns",
+        "3": "I am looking to avoid losses as much as possible."
+      },
+      "showOnLoad": true,
+      "type": "radio",
+      "questionMapping": {
+        "1": [
+          "3",
+          "4"
+        ],
+        "2": [
+          "3"
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "question": "Which of the following best describes your investment philosophy?",
+      "options": {
+        "1": "Seeking stable returns.",
+        "2": "Seeking returns above fixed deposits."
+      },
+      "showOnLoad": false,
+      "type": "radio"
+    },
+    {
+      "id": "4",
+      "question": "My savings generally are used to?",
+      "options": {
+        "1": "Planned investments",
+        "2": "fixed deposit schemes",
+        "3": "buy gold and ornaments"
+      },
+      "showOnLoad": false,
+      "type": "radio"
+    },
+    {
+      "id": "5",
+      "question": "How do you spend?",
+      "options": {
+        "1": "Definite spending",
+        "2": "Careful spending"
+      },
+      "showOnLoad": true,
+      "type": "radio"
+    },
+    {
+      "id": "6",
+      "question": "Who can you depend on if you face a financial emergency?",
+      "options": {
+        "1": "Spouse",
+        "2": "Parents"
+      },
+      "showOnLoad": true,
+      "type": "radio"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Blaa",
+      "email": "blaa@gmail.com",
+      "contact": "999999",
+      "dateofbirth": "18/07/1984"
+    },
+    {
+      "name": "sassa",
+      "email": "qwqw2SD@dff.in",
+      "contact": "wewew",
+      "dateofbirth": "2022-03-10",
+      "id": "CX1wr7W"
+    }
+  ],
+  "userselection": [
+    {
+      "id": "1",
+      "question_id": "1",
+      "option_id": "1"
+    },
+    {
+      "question_id": "2",
+      "option_id": "1",
+      "id": "twp7eyY"
+    },
+    {
+      "question_id": "3",
+      "option_id": "1",
+      "id": "FAZ2Q2g"
+    },
+    {
+      "question_id": "4",
+      "option_id": "2",
+      "id": "WwsXMem"
+    },
+    {
+      "question_id": "5",
+      "option_id": "2",
+      "id": "WUe4Ipk"
+    },
+    {
+      "question_id": "6",
+      "option_id": "2",
+      "id": "nepeJRI"
+    },
+    {
+      "question_id": "5",
+      "option_id": "2",
+      "id": "I_7I244"
+    },
+    {
+      "question_id": "5",
+      "option_id": "2",
+      "id": "tfbY96A"
+    },
+    {
+      "question_id": "5",
+      "option_id": "2",
+      "id": "8rS7CPI"
+    },
+    {
+      "question_id": "2",
+      "option_id": "2",
+      "id": "YgGcmPT"
+    },
+    {
+      "question_id": "2",
+      "option_id": "1",
+      "id": "b-JUSKt"
+    },
+    {
+      "question_id": "2",
+      "option_id": "1",
+      "id": "XNMWp-p"
+    },
+    {
+      "question_id": "2",
+      "option_id": "1",
+      "id": "AZxDbxu"
+    },
+    {
+      "question_id": "2",
+      "option_id": "2",
+      "id": "tOIIhAr"
+    },
+    {
+      "question_id": "3",
+      "option_id": "2",
+      "id": "Mi1RewX"
+    },
+    {
+      "question_id": "5",
+      "option_id": "2",
+      "id": "DTDFynY"
+    },
+    {
+      "question_id": "6",
+      "option_id": "2",
+      "id": "CvthQ3Z"
+    }
+  ]
+}
