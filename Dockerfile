@@ -1,10 +1,10 @@
 # build
-FROM node:12.4.0-alpine as build
+FROM node:17-alpine3.14 as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json /app/package.json
 RUN npm install --silent
-RUN npm install react-scripts@3.0.1 -g --silent
+RUN npm install react-scripts@5.0.0 -g --silent
 COPY .. /app
 RUN npm run build
 
