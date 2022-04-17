@@ -123,7 +123,9 @@ export default function HomeForm(props) {
 					<img src={logo} alt="logo" />
 				</div>
 				<h4>Answer just 4 questions and get a step closer! We will craft a plan thats right got you!</h4>
-				<div className='form-section'>
+				<h3>{`URI ${process.env.REACT_APP_API_URL}`}</h3>
+ <h2>{`URI ${process.env.e1}`}</h2>
+<div className='form-section'>
 					<form onSubmit={handleSubmit} className="needs-validation" noValidate>
 						<div className="form-group">
 							<label htmlFor="contact">Contact No</label>
