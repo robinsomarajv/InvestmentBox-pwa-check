@@ -23,6 +23,17 @@ export default function QuestionSet(props) {
 		fetch(`${process.env.REACT_APP_API_URL}/api/survey`, requestOptions)
 			.then(results => results.json())
 			.then(data => {
+				let response = data.surveyQuestions.map(item => {
+					return {
+						...item,
+						selectedOption :  []
+					}
+
+				});
+
+				data.surveyQuestions = response;
+				debugger;
+				// data.map(items => {})
 				setQuestions(data);
 			});
 	}, [params]);
@@ -72,6 +83,7 @@ export default function QuestionSet(props) {
 			"custId": params.id,
 			"qid": data.qid,
 			oid: data?.selectedOption?.length ? data.selectedOption[0] : data.selectedOption,
+			// oid: data?.selectedOption.join(),
 			sid: questions?.surveyId
 		}));
 
@@ -103,11 +115,12 @@ export default function QuestionSet(props) {
 
 		let mappedQuestions;
 		let mappedQuestionKeys;
-		let question = questions?.surveyQuestions.filter(question => parseInt(question.qid) === parseInt(question_id));
+		let question = questions?.surveyQuestions.filter(question => question.qid === question_id);
 
 		let newQues = {...questions};
-		const qstnIndex = newQues?.surveyQuestions.findIndex((obj => parseInt(obj.qid) === parseInt(question_id)));
-		newQues.surveyQuestions[qstnIndex].selectedOption = option_id;
+		const qstnIndex = newQues?.surveyQuestions.findIndex((obj => obj.qid === question_id));
+		// newQues.surveyQuestions[qstnIndex].selectedOption = option_id;
+		newQues.surveyQuestions[qstnIndex].selectedOption.push(option_id);
 		if (question.length) {
 			mappedQuestions = question[0].questionFlowMetadata;
 		}
@@ -147,24 +160,25 @@ export default function QuestionSet(props) {
 			}
 
 		} else {
-			const objIndex = questions?.surveyQuestions.findIndex((obj => parseInt(obj.qid) === parseInt(question_id)));
-			newQues.surveyQuestions[objIndex].selectedOption = option_id;
+			const objIndex = questions?.surveyQuestions.findIndex((obj => obj.qid === question_id));
+			newQues.surveyQuestions[objIndex].selectedOption.push(option_id);
 		}
 
 		setQuestions(newQues);
 	}
 
 	const addStack = (option_name, option_id, question_id) => {
+		postSelectedOption(question_id, option_id);
 		let newQues = {...questions};
-		const objIndex = questions?.surveyQuestions.findIndex((obj => parseInt(obj.qid) === parseInt(question_id)));
+		const objIndex = questions?.surveyQuestions.findIndex((obj => obj.qid === question_id));
 
 		const question = questions?.surveyQuestions[objIndex];
 
-		if(!question?.selectedOption) {
-			question.selectedOption = [];
-		}
+		// if(!question?.selectedOption) {
+		// 	question.selectedOption = [];
+		// }
 
-		const optionIndex = question?.selectedOption.findIndex(id => parseInt(id) === parseInt(option_id));
+		const optionIndex = question?.selectedOption.findIndex(id => id === option_id);
 
 		if (optionIndex < 0) {
 			newQues?.surveyQuestions[objIndex].selectedOption.push(option_id);
@@ -181,7 +195,7 @@ export default function QuestionSet(props) {
 	}
 
 	const getTagStatus = (question_id, option_id, data) => {
-		const item = questions?.surveyQuestions.filter(question => parseInt(question.qid) === parseInt(question_id));
+		const item = questions?.surveyQuestions.filter(question => question.qid === question_id);
 
 		if (item.length && item[0]?.selectedOption && item[0]?.selectedOption?.length && item[0]?.selectedOption.indexOf(option_id) >= 0) {
 			return true;
@@ -195,9 +209,8 @@ export default function QuestionSet(props) {
 		return <div key={question.qid} className='card'>
 			<div key={question.qid} className="card-body">
 				<label htmlFor="question" className='questions'>{question.question}</label>
-					{question?.multiSelect}
 					<>
-						{question?.multiSelect && 
+						{!question?.multiSelect && 
 							Object.keys(question.options).map((data) => {
 								return <div key={question.qid + '_' + question.options[data]?.oid} className="form-check">
 									<input className="form-check-input" onChange={value => changeDetector(value)} required type="radio" value={question.qid + '_' + question.options[data]?.oid} name={"flexRadio " + question.qid} id={question.qid} />
@@ -221,7 +234,7 @@ export default function QuestionSet(props) {
 					</>
 				}
 
-				{!question?.multiSelect &&
+				{question?.multiSelect &&
 					<>
 						<div className="hstack gap-2" key={question.qid}>
 							{
@@ -264,9 +277,9 @@ export default function QuestionSet(props) {
 					</div>
 					<h4>Answer just 4 questions and get a step closer! We will craft a plan thats right got you!</h4>
 					<div className='form-section question-padding'>
-						{/* {submitted && <span className="text-danger">
+						{submitted && <span className="text-danger">
 							Please answer all the questions.
-						</span>} */}
+						</span>}
 						<form onSubmit={handleSubmit} noValidate>
 							{content}
 							<br></br>

@@ -136,10 +136,11 @@ export default function HomeForm(props) {
 							<label htmlFor="name">Name </label>
 							<input type="text" required className="form-control" id="name" value={name} onChange={(e) => changeDetector(e.target.value, 'name')} placeholder="Enter name" name="name" />
 
-						</div>}
-						{nameErr.error && <span className="text-danger">
+							{nameErr.error && <span className="text-danger">
 							Please enter a name.
 						</span>}
+						</div>}
+				
 						{showUser && <div className="form-group">
 							<label htmlFor="email">Email</label>
 							<input type="email" required className="form-control" id="email" value={email} onChange={(e) => changeDetector(e.target.value, 'email')} placeholder="Enter email" name="email" />

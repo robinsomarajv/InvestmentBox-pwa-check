@@ -26,7 +26,7 @@ export default function ThankYouView(props) {
 						<p className='content blue-color-dark'>
 							{
 								props.responseAnswers.map(data => {
-									return <a href={data?.link}>{data?.name}</a>
+									return <a key={data?.id} href={data?.link}>{data?.name}</a>
 								})
 							}
 						</p>
