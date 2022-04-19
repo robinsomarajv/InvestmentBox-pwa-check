@@ -1,52 +1,69 @@
-.form-wrap{
-   margin: 20px auto 0;
-   width: 100%;
-   .d-flex{
-       align-items: center;
-       justify-content: space-between;
-        h2{
+.form-wrap {
+    margin: 20px auto 0;
+    width: 100%;
+
+    .d-flex {
+        align-items: center;
+        justify-content: space-between;
+
+        h2 {
             font-family: Garamond, serif;
             color: #5A5E5A;
         }
-   }
-   h4{
-       color: #5E7289;
-       font-size: 18px;
-       font-family: PoppinsMedium;
-   }
-   .form-section{
+    }
+
+    h4 {
+        color: #5E7289;
+        font-size: 18px;
+        font-family: PoppinsMedium;
+    }
+
+    .tc {
+        font-family: PoppinsRegular;
+        font-size: 12px;
+    }
+
+    .form-section {
         padding: 40px 0 0 0;
-        background-image: url('./assets/images/bg-top.png');   
+        background-image: url('./assets/images/bg-top.png');
         background-repeat: no-repeat;
         background-size: contain;
         background-position-x: -12px;
-        label{
+
+        label {
             font-family: PoppinsSemiBold;
             color: #5E7289;
             font-size: 14px;
-            &.questions::after{
+
+            &.questions::after {
                 content: '*';
             }
         }
-        .form-group{
+
+        .form-group {
             margin-bottom: 10px;
-            &:first-child{
-                margin-top: 10px    ;
+
+            &:first-child {
+                margin-top: 10px;
             }
-            .form-control{
+
+            .form-control {
                 width: 40%;
                 box-shadow: none;
                 outline: none;
-                &.border-0{
+
+                &.border-0 {
                     width: auto;
                     padding-left: 0;
                 }
             }
         }
-        .w-40{
+
+        .w-40 {
             width: 40%;
         }
-        button{
+
+        button {
             background: #2D64BD;
             font-family: PoppinsSemiBold;
             font-size: 14px;
@@ -55,76 +72,89 @@
             float: right;
             margin-top: 5px;
         }
-        .card{
+
+        .card {
             background: #F3F2EF;
             margin-bottom: 12px;
-                label{
-                    color: black;
-                }
-                .form-check{
-                    label{
-                        font-family: PoppinsRegular;
-                    }
-                }
+
+            label {
+                color: black;
             }
-            &.question-padding {
-                padding: 125px 0 0 0;
-            }
-            .hstack{
-                flex-wrap: wrap;
-                .bg-light{
-                    cursor: pointer;
-                    background: white;
+
+            .form-check {
+                label {
                     font-family: PoppinsRegular;
-                    font-size: 14px;
-                    border-radius: 15px;
-                    padding: 4px 10px;
-                    &.active{
-                        background: #2c64bde0 !important;
-                        color: white;
-                    }
                 }
             }
-   }
+        }
 
-  .loader{
-    background-color: rgb(248 249 250 / 67%);
-    height: 100%;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: 0;
-    top: 0;
-  } 
+        &.question-padding {
+            padding: 125px 0 0 0;
+        }
 
-   @media screen and (max-width:768px) {
-       h2{
-         font-size: 18px;  
-       }
-            h4 {
-                font-size: 15px;
-            }
-            img{
-             width: 115px;
-            }
-            .form-section{
-                .form-group{
-                    &:first-child{
-                        margin-top: 0;
-                    }
-                    .form-control{
-                        width: 100%;
-                    }
+        .hstack {
+            flex-wrap: wrap;
+
+            .bg-light {
+                cursor: pointer;
+                background: white;
+                font-family: PoppinsRegular;
+                font-size: 14px;
+                border-radius: 15px;
+                padding: 4px 10px;
+
+                &.active {
+                    background: #2c64bde0 !important;
+                    color: white;
                 }
-            .w-40{
+            }
+        }
+    }
+
+    .loader {
+        background-color: rgb(248 249 250 / 67%);
+        height: 100%;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 0;
+        top: 0;
+    }
+
+    @media screen and (max-width:768px) {
+        h2 {
+            font-size: 18px;
+        }
+
+        h4 {
+            font-size: 15px;
+        }
+
+        img {
+            width: 115px;
+        }
+
+        .form-section {
+            .form-group {
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                .form-control {
+                    width: 100%;
+                }
+            }
+
+            .w-40 {
                 width: 100%;
             }
+
             &.question-padding {
                 padding: 45px 0 0 0;
             }
-            }
         }
-    
-   
+    }
+
+
 }

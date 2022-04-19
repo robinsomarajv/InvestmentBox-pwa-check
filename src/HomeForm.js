@@ -22,6 +22,9 @@ export default function HomeForm(props) {
 	const [dobErr, setDobErr] = useState({ error: false });
 
 	const handleSubmit = (e) => {
+
+		console.log("===button name===", e.target);
+		debugger;
 		e.preventDefault();
 		const isValid = formValidation();
 		if (isValid) {
@@ -31,40 +34,45 @@ export default function HomeForm(props) {
 	}
 
 	const getDataByPhone = (contact) => {
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' , 'Accept': 'application/json'},
-			body:JSON.stringify(
-				{
-					custPhone: contact,
-				}
-			)
-		};
+		let phoneregex = /^\d{10}$/;
+		debugger;
+		if (new String(contact.trim()).match(phoneregex)) {
 
-		fetch(`${process.env.REACT_APP_API_URL}/api/customer/getbyphorem`, requestOptions)
-			.then(response => response.json())
-			.then(data => {
-				if(data && data.statusCode == 404) {
-					setShowUser(true);
-					setName('');
-					setDateofBirth('');
-					setEmail('');
-				}
-				else if (data) {
+			const requestOptions = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+				body: JSON.stringify(
+					{
+						custPhone: contact,
+					}
+				)
+			};
 
-					console.log(data);
-					setName(data?.custFirstName + ' ' + (data?.custLastName ? data ?.custLastName : ''));
-					setDateofBirth(data?.custDob);
-					setEmail(data?.custEmail);
-					setShowUser(true);
-					// navigate("/questions/" + data?.custId);
-					// sessionStorage.setItem('custName', user.name);
-					// setQuestionView(true);
-				}
-			})
-			.catch((error) => {
-				console.error('Something went wrong:', error);
-			});
+			fetch(`${process.env.REACT_APP_API_URL}/api/customer/getbyphorem`, requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					if (data && data.statusCode == 404) {
+						setShowUser(true);
+						setName('');
+						setDateofBirth('');
+						setEmail('');
+					}
+					else if (data) {
+
+						console.log(data);
+						setName(data?.custFirstName + ' ' + (data?.custLastName ? data?.custLastName : ''));
+						setDateofBirth(data?.custDob);
+						setEmail(data?.custEmail);
+						setShowUser(true);
+						// navigate("/questions/" + data?.custId);
+						// sessionStorage.setItem('custName', user.name);
+						// setQuestionView(true);
+					}
+				})
+				.catch((error) => {
+					console.error('Something went wrong:', error);
+				});
+		}
 	}
 
 	const changeDetector = (value, fieldName) => {
@@ -92,22 +100,24 @@ export default function HomeForm(props) {
 
 	const formValidation = () => {
 		let isValid = true;
-		if (name.trim().length === 0) {
+		if (showUser && name.trim().length === 0) {
 			setNameErr({ error: true });
 			isValid = false;
 		}
 
-		if (email.trim().length === 0 || !regExp.test(email)) {
+		if (showUser && (email.trim().length === 0 || !regExp.test(email))) {
 			setEmailErr({ error: true });
 			isValid = false;
 		}
 
-		if (contact.trim().length === 0) {
+		let phoneregex = /^\d{10}$/;
+		debugger;
+		if (contact.trim().length === 0 || !new String(contact.trim()).match(phoneregex)) {
 			setContactErr({ error: true });
 			isValid = false;
 		}
 
-		if (dateofbirth.trim().length === 0) {
+		if (showUser && dateofbirth.trim().length === 0) {
 			setDobErr({ error: true });
 			isValid = false;
 		}
@@ -137,10 +147,10 @@ export default function HomeForm(props) {
 							<input type="text" required className="form-control" id="name" value={name} onChange={(e) => changeDetector(e.target.value, 'name')} placeholder="Enter name" name="name" />
 
 							{nameErr.error && <span className="text-danger">
-							Please enter a name.
-						</span>}
+								Please enter a name.
+							</span>}
 						</div>}
-				
+
 						{showUser && <div className="form-group">
 							<label htmlFor="email">Email</label>
 							<input type="email" required className="form-control" id="email" value={email} onChange={(e) => changeDetector(e.target.value, 'email')} placeholder="Enter email" name="email" />
@@ -156,7 +166,8 @@ export default function HomeForm(props) {
 							</span>}
 						</div>}
 						<div className='w-40'>
-							<button type="submit" className="btn btn-primary">{!showUser ? 'Proceed' : 'Submit'}</button>
+							<p className='tc'>By continuing, you agree to our terms and conditions. </p>
+							<button type="submit" className="btn btn-primary">{!showUser ? 'Continue' : 'Submit'}</button>
 						</div>
 					</form>
 				</div>
