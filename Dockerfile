@@ -17,5 +17,5 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./cert/5be7adc250a69095.crt /etc/nginx/certs/5be7adc250a69095.crt
 COPY ./cert/fabits-de.key /etc/nginx/certs/fabits-de.key
-EXPOSE 80
+EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
