@@ -1,4 +1,3 @@
-# build
 FROM node:17-alpine3.14 as build
 ARG API_URI 
 WORKDIR /app
@@ -19,3 +18,5 @@ COPY ./cert/5be7adc250a69095.crt /etc/nginx/certs/5be7adc250a69095.crt
 COPY ./cert/fabits-de.key /etc/nginx/certs/fabits-de.key
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
+
+
