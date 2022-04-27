@@ -5,6 +5,16 @@ import './ThankYou.scss';
 export default function ThankYouView(props) {
 	return (
 		<div className="thanks_wrap">
+			<nav className="navbar navbar-expand-lg navbar-light bg-light py-0">
+				<a className="navbar-brand" href="#">
+					<img width={'170px'} src='https://secureservercdn.net/192.169.220.85/2ma.86c.myftpupload.com/wp-content/uploads/2021/05/Fabits-Logo-WT.png?time=1650808259' />
+				</a>
+				{/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span className="navbar-toggler-icon"></span>
+				</button> */}
+
+
+			</nav>
 			<div className='container'>
 				<div className='row'>
 					<div className='col-md-8'>

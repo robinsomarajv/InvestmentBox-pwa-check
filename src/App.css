@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+body {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1140%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(28%2c 191%2c 210%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c392.559C72.814%2c403.665%2c143.992%2c359.607%2c201.648%2c313.771C255.982%2c270.576%2c288.615%2c207.978%2c313.625%2c143.228C337.459%2c81.521%2c339.006%2c16.943%2c341.826%2c-49.147C345.288%2c-130.299%2c389.08%2c-229.889%2c332.009%2c-287.687C273.888%2c-346.548%2c171.678%2c-295.501%2c89.473%2c-304.716C24.997%2c-311.943%2c-33.874%2c-339.676%2c-98.647%2c-335.96C-177.525%2c-331.435%2c-279.415%2c-346.021%2c-324.268%2c-280.979C-370.421%2c-214.053%2c-294.737%2c-124.3%2c-300.528%2c-43.209C-305.692%2c29.106%2c-385.591%2c96.394%2c-355.94%2c162.552C-326.333%2c228.613%2c-226.447%2c218.458%2c-165.645%2c257.748C-104.616%2c297.184%2c-71.831%2c381.603%2c0%2c392.559' fill='%231ab2c3'%3e%3c/path%3e%3cpath d='M1440 839.807C1516.367 845.2339999999999 1589.642 933.9449999999999 1657.329 898.1700000000001 1723.165 863.373 1691.024 756.465 1724.003 689.7 1758.569 619.722 1869.562 576.943 1853.754 500.511 1837.587 422.339 1718.475 423.235 1658.094 371.02099999999996 1609.831 329.286 1598.211 247.49200000000002 1537.713 227.21800000000002 1477.116 206.911 1416.61 253.663 1354.652 269.333 1289.706 285.759 1209.346 271.504 1164.795 321.534 1120.249 371.55899999999997 1149.666 450.798 1134.885 516.131 1118.338 589.269 1051.179 655.875 1072.917 727.641 1094.604 799.24 1170.1100000000001 846.768 1241.656 868.629 1306.87 888.556 1371.982 834.973 1440 839.807' fill='%231ecce1'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1140'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -33,7 +37,44 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+.container.container-full {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  height: 100vh;
+  background: none;
+
+}
+
+@media screen and (max-width:768px) {
+  .container.container-full {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-wrap {
+    padding: 50px 15px 0 !important;
+  }
+
+  .col-md-6:first-child .form-wrap {
+
+    padding: 50px 15px 0;
+  }
+
+  .col-md-6:last-child img {
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  nav .navbar-brand img {
+    width: 125px;
   }
 }

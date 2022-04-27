@@ -38,13 +38,15 @@ function App() {
 			headers: { 'Content-Type': 'application/json' , 'Accept': 'application/json'},
 			body:JSON.stringify(
 				{
-					custFirstName: user?.name.split(" ")[0],
-					custLastName: user?.name.split(" ").length > 1 ? user.name.split()[1] : '',
+					custFirstName: user?.firstName,
+					custLastName: user?.lastName,
 					custEmail: user?.email,
 					custPhone: user?.contact,
-					custDob: user?.dateofbirth,
+					// custDob: user?.dateofbirth,
 					custLocation: latLngVal ? latLngVal : '',
-					goal: ""
+					age: user?.age,
+					privacyConsent: user?.consent
+					// goal: ""
 				}
 			)
 		};
@@ -54,7 +56,7 @@ function App() {
 			.then(data => {
 				if (data) {
 					navigate("/questions/" + data?.custId);
-					sessionStorage.setItem('custName', user.name);
+					sessionStorage.setItem('custName', user?.firstName + ' ' + user?.lastName);
 					setQuestionView(true);
 				}
 			})
@@ -64,7 +66,7 @@ function App() {
 	}
 
 	return (
-		<div className='container'>
+		<div className='container container-full'>
 			{!questionView && <HomeForm onSubmission={userFormSubmitted}></HomeForm>}
 			{/* {questionView && <QuestionSet questions={questions}></QuestionSet>} */}
 		</div>

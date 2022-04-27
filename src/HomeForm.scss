@@ -1,6 +1,9 @@
+.container {}
+
 .form-wrap {
     margin: 20px auto 0;
     width: 100%;
+    padding-top: 100px;
 
     .d-flex {
         align-items: center;
@@ -8,7 +11,9 @@
 
         h2 {
             font-family: Garamond, serif;
+            font-family: PoppinsMedium;
             color: #5A5E5A;
+            color: white;
         }
     }
 
@@ -16,16 +21,21 @@
         color: #5E7289;
         font-size: 18px;
         font-family: PoppinsMedium;
+        font-family: PoppinsRegular;
+        color: #fff;
+        font-size: 15px;
     }
 
     .tc {
         font-family: PoppinsRegular;
         font-size: 12px;
+        color: #fff;
     }
 
     .form-section {
         padding: 40px 0 0 0;
-        background-image: url('./assets/images/bg-top.png');
+        //background-image: url('./assets/images/bg-top.png');
+        padding: 0;
         background-repeat: no-repeat;
         background-size: contain;
         background-position-x: -12px;
@@ -34,6 +44,7 @@
             font-family: PoppinsSemiBold;
             color: #5E7289;
             font-size: 14px;
+            color: #fff;
 
             &.questions::after {
                 content: '*';
@@ -48,7 +59,7 @@
             }
 
             .form-control {
-                width: 40%;
+                width: 60%;
                 box-shadow: none;
                 outline: none;
 
@@ -60,7 +71,7 @@
         }
 
         .w-40 {
-            width: 40%;
+            width: 60%;
         }
 
         button {
@@ -71,6 +82,9 @@
             border-radius: 20px;
             float: right;
             margin-top: 5px;
+            background: white;
+            color: #1cbfd2;
+            border: transparent;
         }
 
         .card {
@@ -79,6 +93,7 @@
 
             label {
                 color: black;
+                color: #fff;
             }
 
             .form-check {
@@ -153,8 +168,21 @@
             &.question-padding {
                 padding: 45px 0 0 0;
             }
+
+
+        }
+
+        .col-md-6 {
+            img {
+                width: 75%;
+            }
+        }
+
+        .container {
+            // background-color: red;
         }
     }
+
 
 
 }
