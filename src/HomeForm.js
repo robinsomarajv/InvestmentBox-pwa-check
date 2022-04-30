@@ -170,7 +170,7 @@ export default function HomeForm(props) {
 								<h2>Investment Box Onboarding</h2>
 								{/* <img src={logo} alt="logo" /> */}
 							</div>
-							<h4>Answer just 4 questions and get a step closer! We will craft a plan thats right got you!</h4>
+							<h4>Answer just 4 questions and get a step closer! We will craft a plan thats right for you!</h4>
 							<div className='form-section'>
 								<form autoComplete='off' onSubmit={handleSubmit} className="needs-validation" noValidate>
 									<div className="form-group">

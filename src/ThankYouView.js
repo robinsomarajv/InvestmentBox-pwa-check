@@ -31,9 +31,9 @@ export default function ThankYouView(props) {
 						<p className='content'>Congratulations {sessionStorage.custName} ! We thank you for your
 							valuable time for taking the survey.
 							Based on your initial investment profiling, we
-							recommend below Fabits Investment boxes.
+							suggest below Investment boxes.
 						</p>
-						<p className='content blue-color-dark'>
+						<p className='content blue-color-dark' style={{fontSize:'22px'}}>
 							{
 								props.responseAnswers.map(data => {
 									return <a key={data?.id} href={data?.link}>{data?.name}</a>
@@ -61,7 +61,7 @@ export default function ThankYouView(props) {
 							</h6>
 							<p>Download our Mobile App Now!
 							</p>
-							<a target='_blank' href='https://play.google.com/store/apps/details?id=com fabits.app
+							<a target='_blank' href='https://play.google.com/store/apps/details?id=com.fabits.app
 '><img src={google} /></a>
 							<a target='_blank' href='https://apps.apple.com/us/app/fabits/id1600230367
 '><img src={apple} /></a>

@@ -20,18 +20,9 @@ export default function QuestionSet(props) {
 		Promise.all([getUserResponses(), getSurveyQuestions()])
 			.then(values => {
 				values[0].json().then(data => {
-					console.log("===data====", data);
 					values[1].json().then(item => {
-						console.log("===data1====", item);
-
-						let response = item.surveyQuestions.map(ques => {
-							if (ques.multiSelect) {
-								console.log("===multiselect===");
-							} else {
-								console.log("===single select====");
-							}
+						let response = item.surveyQuestions.map(ques => {				
 							if (data?.statusCode === 404) {
-								console.log("===buhahhaa");
 								return {
 									...ques,
 									selectedOption: []
@@ -98,7 +89,7 @@ export default function QuestionSet(props) {
 
 	const formValidation = () => {
 		const itemsShown = questions && questions?.surveyQuestions.filter(item => item.qid).length;
-		const itemsAnswered = questions && questions?.surveyQuestions.filter(item => item.selectedOption).length;
+		const itemsAnswered = questions && questions?.surveyQuestions.filter(item => item.selectedOption.length).length;
 
 		return itemsShown !== itemsAnswered;
 	}
@@ -213,25 +204,28 @@ export default function QuestionSet(props) {
 
 		//debugger;
 
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(submitData)
-		};
+		if(submitData.length) {
 
-		fetch(`${process.env.REACT_APP_API_URL}${url}`, requestOptions)
-			.then(response => response.json())
-			.then(data => {
-				if (data) {
-					if (url === '/api/survey/submit') {
-						setResponseAnswers(data);
-						setThankYouView(true);
+			const requestOptions = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(submitData)
+			};
+
+			fetch(`${process.env.REACT_APP_API_URL}${url}`, requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					if (data) {
+						if (url === '/api/survey/submit') {
+							setResponseAnswers(data);
+							setThankYouView(true);
+						}
 					}
-				}
-			})
-			.catch((error) => {
-				console.error('Something went wrong:', error);
-			});
+				})
+				.catch((error) => {
+					console.error('Something went wrong:', error);
+				});
+		}
 	}
 
 	const changeDetector = (currentSelected) => {
