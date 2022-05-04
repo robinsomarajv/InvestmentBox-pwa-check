@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import HomeForm from './HomeForm';
+import Loader from './loader';
 
 import {
 	useNavigate,
@@ -10,6 +11,7 @@ function App() {
 	let navigate = useNavigate();
 	const [questionView, setQuestionView] = useState(false);
 	const [latLngVal, setLatLongVal] = useState();
+	const [loaderShown, setLoaderShown] = useState(false);
 
 	getLocation();
 
@@ -33,6 +35,7 @@ function App() {
 	}
 
 	function userFormSubmitted(user) {
+		setLoaderShown(true);
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' , 'Accept': 'application/json'},
@@ -57,6 +60,7 @@ function App() {
 				if (data) {
 					navigate("/questions/" + data?.custId);
 					sessionStorage.setItem('custName', user?.firstName + ' ' + user?.lastName);
+					setLoaderShown(false);
 					setQuestionView(true);
 				}
 			})
@@ -67,6 +71,7 @@ function App() {
 
 	return (
 		<div className='container container-full'>
+			{loaderShown && <Loader />}
 			{!questionView && <HomeForm onSubmission={userFormSubmitted}></HomeForm>}
 			{/* {questionView && <QuestionSet questions={questions}></QuestionSet>} */}
 		</div>

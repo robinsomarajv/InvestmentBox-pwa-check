@@ -3,7 +3,7 @@ import './HomeForm.scss';
 import logo from './assets/images/t.jpeg';
 import banner from './assets/images/banner.png';
 import fabitsLogo from './assets/images/logo.png';
-
+import Loader from './loader';
 export default function HomeForm(props) {
 
 	/* eslint-disable */
@@ -28,14 +28,32 @@ export default function HomeForm(props) {
 	const [contactErr, setContactErr] = useState({ error: false });
 	const [dobErr, setDobErr] = useState({ error: false });
 	const [ageErr, setAgeErr] = useState({ error: false });
+	const [loaderShown, setLoaderShown] = useState(false);
 
 	const handleSubmit = (e) => {
 
+		setLoaderShown(true);
 		e.preventDefault();
 		const isValid = formValidation();
 		if (isValid) {
 			const user = { firstName, lastName, email, contact, age, consent };
 			props.onSubmission(user);
+			setLoaderShown(false);
+		}
+	}
+
+	const handleContactSubmit = (e) => {
+
+		e.preventDefault();
+		// const isValid = formValidation();
+		// if (isValid) {
+		// 	const user = { firstName, lastName, email, contact, age, consent };
+		// 	props.onSubmission(user);
+		// }
+
+		const isValid = formValidation();
+		if (isValid) {
+			getDataByPhone(contact);
 		}
 	}
 
@@ -52,10 +70,11 @@ export default function HomeForm(props) {
 					}
 				)
 			};
-
+			setLoaderShown(true);
 			fetch(`${process.env.REACT_APP_API_URL}/api/customer/getbyphorem`, requestOptions)
 				.then(response => response.json())
 				.then(data => {
+					setLoaderShown(false);
 					if (data && data.statusCode == 404) {
 						setShowUser(true);
 						setFirstName('');
@@ -77,6 +96,8 @@ export default function HomeForm(props) {
 					}
 				})
 				.catch((error) => {
+
+					setLoaderShown(false);
 					console.error('Something went wrong:', error);
 				});
 		}
@@ -157,6 +178,7 @@ export default function HomeForm(props) {
 
 	return (
 		<>
+			{loaderShown && <Loader />}
 			<nav className="navbar navbar-expand-lg navbar-light bg-light py-0">
 				<a className="navbar-brand" href="#">
 					<img width={'170px'} src='https://secureservercdn.net/192.169.220.85/2ma.86c.myftpupload.com/wp-content/uploads/2021/05/Fabits-Logo-WT.png?time=1650808259' />
@@ -172,7 +194,21 @@ export default function HomeForm(props) {
 							</div>
 							<h4>Answer just 4 questions and get a step closer! We will craft a plan thats right for you!</h4>
 							<div className='form-section'>
-								<form autoComplete='off' onSubmit={handleSubmit} className="needs-validation" noValidate>
+								{ !showUser && 
+									<form autoComplete='off' onSubmit={handleContactSubmit} className="needs-validation" noValidate>
+										<div className="form-group">
+											<label htmlFor="contact">Contact No</label>
+											<input type="text" required className="form-control" id="name" value={contact} onChange={(e) => changeDetector(e.target.value, 'contact')} placeholder="Enter contact" name="contact" />
+											{contactErr.error && <span className="text-danger">
+												Please enter a valid contact number.
+											</span>}
+										</div>
+										<div className='w-40'>
+										<button type="submit" className="btn btn-primary">Continue</button>
+										</div>
+									</form>
+								}
+								{showUser && <form autoComplete='off' onSubmit={handleSubmit} className="needs-validation" noValidate>
 									<div className="form-group">
 										<label htmlFor="contact">Contact No</label>
 										<input type="text" required className="form-control" id="name" value={contact} onChange={(e) => changeDetector(e.target.value, 'contact')} onBlur={(e) => getDataByPhone(e.target.value)} placeholder="Enter contact" name="contact" />
@@ -222,7 +258,7 @@ export default function HomeForm(props) {
 										<span className='tc'> By continuing, you agree to our terms and conditions. </span>
 										<button type="submit" className="btn btn-primary">{!showUser ? 'Continue' : 'Submit'}</button>
 									</div>
-								</form>
+								</form>}
 							</div>
 						</div>
 					</div>

@@ -5,13 +5,14 @@ import './QuestionSet.scss';
 
 import ThankYouView
 	from './ThankYouView';
-
+import Loader from './loader';
 export default function QuestionSet(props) {
 	const [questions, setQuestions] = useState();
 	const [thankYouView, setThankYouView] = useState(false);
 	const [submitted, setSubmitted] = useState(false);
 	const [responseAnswers, setResponseAnswers] = useState();
 
+	const [loaderShown, setLoaderShown] = useState(false);
 	// const [surveyId, setSurveyId] = useState('');
 	let params = useParams();
 
@@ -21,7 +22,7 @@ export default function QuestionSet(props) {
 			.then(values => {
 				values[0].json().then(data => {
 					values[1].json().then(item => {
-						let response = item.surveyQuestions.map(ques => {				
+						let response = item.surveyQuestions.map(ques => {
 							if (data?.statusCode === 404) {
 								return {
 									...ques,
@@ -204,17 +205,20 @@ export default function QuestionSet(props) {
 
 		//debugger;
 
-		if(submitData.length) {
+		if (submitData.length) {
 
 			const requestOptions = {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(submitData)
 			};
-
+			if (url === '/api/survey/submit') {
+				setLoaderShown(true);
+			}
 			fetch(`${process.env.REACT_APP_API_URL}${url}`, requestOptions)
 				.then(response => response.json())
 				.then(data => {
+					setLoaderShown(false);
 					if (data) {
 						if (url === '/api/survey/submit') {
 							setResponseAnswers(data);
@@ -223,6 +227,7 @@ export default function QuestionSet(props) {
 					}
 				})
 				.catch((error) => {
+					setLoaderShown(false);
 					console.error('Something went wrong:', error);
 				});
 		}
@@ -402,6 +407,8 @@ export default function QuestionSet(props) {
 
 	return (
 		<>
+
+			{loaderShown && <Loader />}
 			{!thankYouView && <div className='container containerQuestion'>
 				<nav className="navbar navbar-expand-lg navbar-light bg-light py-0">
 					<a className="navbar-brand" href="#">
