@@ -13,7 +13,7 @@ function App() {
 	const [latLngVal, setLatLongVal] = useState();
 	const [loaderShown, setLoaderShown] = useState(false);
 
-	getLocation();
+	// getLocation();
 
 	function getLocation() {
 		if (navigator.geolocation) {
